@@ -8,50 +8,27 @@ import br.com.alura.rh.ValidacaoException;
 
 public class Funcionario {
 
-	private String nome;
-	private String cpf;
-	private Cargo cargo;
-	private BigDecimal salario;
+	private DadosPessoais dadosPessoais;
 	private LocalDate dataUltimoReajuste;
 
-	public Funcionario(String nome, String cpf, Cargo cargo, BigDecimal salario) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.cargo = cargo;
-		this.salario = salario;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public Cargo getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
+	public void promover(Cargo novoCargo) {
+		this.dadosPessoais.setCargo(novoCargo);
 	}
 	
-	public BigDecimal getSalario() {
-		return salario;
+	public DadosPessoais getDadosPessoais() {
+		return dadosPessoais;
 	}
-
+	
+	public LocalDate getDataUltimoReajuste() {
+		return dataUltimoReajuste;
+	}
+	
+	public Funcionario(String nome, String cpf, Cargo cargo, BigDecimal salario) {
+		this.dadosPessoais = new DadosPessoais(nome, cpf, cargo, salario);
+	}
+	
 	public void atualizaSalario(BigDecimal aumento) {
-		this.salario = this.salario.add(aumento);
+		this.dadosPessoais.setSalario(this.dadosPessoais.getSalario().add(aumento));
 		this.dataUltimoReajuste = LocalDate.now();
 	}
-
 }
